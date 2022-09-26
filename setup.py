@@ -9,7 +9,7 @@ from setuptools import find_packages, setup
 # Package meta-data.
 NAME = 'pippa-cnn-segmentation'
 DESCRIPTION = 'Image analysis using deep learning.'
-URL = 'https://gitlab.psb.ugent.be/Brassica/script_soup/2018-09-24_brassica_segmentation'
+URL = 'https://github.com/MMichaelVdV/Brassica_segmentation'
 EMAIL = 'sam.demeyer@psb.ugent.be'
 AUTHOR = 'Sam De Meyer <samey>'
 REQUIRES_PYTHON = '>=3.7.0'
@@ -17,7 +17,7 @@ VERSION = '0.1.0'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    'hooloovoo @ git+https://gitlab.psb.ugent.be/Utilities/hooloovoo.git@master',
+    'hooloovoo @ git+https://github.com/MMichaelVdV/hooloovoo.git@master',
     'matplotlib',
     'numpy',
     'pandas',
@@ -56,7 +56,7 @@ setup(
     url=URL,
     packages=find_packages(exclude=["tests", "applications"]),
     entry_points={
-        'console_scripts': ['pippa_cnn_segmentation=pippa_cnn_segmentation.libs.command_line:main'],
+        'console_scripts': ['cnn_segmentation=cnn_segmentation.libs.command_line:main'],
     },
     install_requires=REQUIRED,
     extras_require=EXTRAS,
