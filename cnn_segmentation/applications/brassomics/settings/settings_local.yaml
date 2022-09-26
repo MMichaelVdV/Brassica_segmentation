@@ -1,0 +1,80 @@
+#device: "cuda"
+device: null
+
+#mode: "TRAINING"
+mode: "INFERENCE"
+
+model:
+  DenseNet:
+    backbone:
+      published: "M121"
+      pretrained: true
+    head:
+      input_downscale:  1
+      n_planes:        16
+      n_classes:        2
+
+
+training:
+
+  data:
+    x: ""
+    y: ""
+
+  preprocess:
+    cache_dir: ""
+    max_size: {height: 600, width: 600}
+    bidir_overlap: 40
+    min_foreground_fraction: 0.01
+
+  data_loader:
+    shuffle: true
+    num_workers: 3
+    batch_size: 1
+    weighted_sampler: true
+    minimal_weight: 0.1
+
+  params:
+    class_weights: [1, 2]
+    test_size: 0.1
+    padding: 40
+    augment:
+      rotation: 5
+      brightness: 0.2
+      contrast: 0.2
+      saturation: 0.2
+      hue: 0.1
+    optimizer:
+      lr: 0.01
+      momentum: 0.95
+      patience: 4
+
+  display:
+    intervals:
+      console: "5s"
+      gui: "10s"
+
+  logging:
+    dir: ""
+#    resume_from: "last"
+    resume_from: null
+    intervals:
+      stats: "1m"
+      train_example: "5m"
+      model:
+        min: "10m"
+        max: "25m"
+
+
+inference:
+  data:
+#    x: ""
+#    x: ""
+    x: ""
+    y: ""
+  model: ""
+  max_size: {height: 400, width: 400}
+  postprocess:
+    threshold: 0.5
+    size_threshold: 200
+  n_cores: 8

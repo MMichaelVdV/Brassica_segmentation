@@ -1,0 +1,117 @@
+# device: "cpu"    # Run everything on cpu (usually very slow).
+# device: "cuda"   # Use gpu for forward and backward pass (faster).
+device: null      # Use "cuda" if a gpu is available, use "cpu" otherwise.
+
+#mode: "TRAINING"    # Learn a new model / pixel classifier
+mode: "INFERENCE"   # Use an existing model to predict (usually new and unlabelled) images.
+
+model:
+
+  # A deep convolutional neural network, shares most of its architecture with:
+  # `"Densely Connected Convolutional Networks" <https://arxiv.org/pdf/1608.06993.pdf>`
+  DenseNet:
+
+
+    # Use one of the pre-trained models from the paper (recommended for large datasets).
+#    backbone:
+#      published: "M121"
+#      pretrained: true  # Re-use parameters from a pre-trained network trained on everyday objects.
+
+     # Or use a custom architecture, pre-trained weights are not available (recommended if you know what you're doing).
+    backbone:
+      num_init_features: 24               # These params define the model structure.
+      growth_rate:       12               # See the paper for details.
+      block_config:      [4, 8, 16, 12]
+      bn_size:            2
+      drop_rate:          0
+
+    head:
+      input_downscale: .5  # If (< 1): improves speed at the cost of accuracy by decreasing input image resolution.
+      n_planes:        12  # Increase upsampling layers size, higher = more powerful but also more prone to overfitting.
+      n_classes:        2  # number of output classes, use 2 for only foreground and background class, n > 2 otherwise.
+
+
+training:  # this entire section can be omitted if you only want to infer with a pre-trained network.
+
+  # Where to look for training data. `x` and `y` are both folders with images.
+  # `x` contains RGB images and `y` contains the ground truth masks.
+  # Both folders can have subdirectories, as long as they match in `x` and `y`.
+  data:
+    x: ""
+    y: ""
+
+  # Images will be saved in bite-sized pieces in the `cache` dir during training.
+  # This dir can be removed again after training.
+  preprocess:
+    cache_dir: ""
+    # If a training image is bigger than this, cut it in pieces and train on each piece separately.
+    max_size: {height: 600, width: 600}
+    bidir_overlap: 40              # allow some overlap between pieces, to prevent losing training data on edges.
+    min_foreground_fraction: 0.01  # discard images if their fraction of foreground pixels is below this threshold.
+
+  data_loader:
+    shuffle: true   # Train on images in random order? In almost all cases 'true' is the best option.
+    num_workers: 4  # Number of cpu's that are busy collecting images from the storage device.
+    batch_size: 12  # Number of images simultaneously on inference device. Set as high as possible for your hardware.
+    weighted_sampler: true  # More weight to images if the background and foreground have more similar colors.
+    minimal_weight: 0.1     # The higher this number, the lower the effect of weighted sampling.
+
+  params:
+    class_weights: [1, 2]  # Use this in case of serious class imbalance to give more importance to a rare class.
+    test_size: 0.05        # Fraction images use to evaluate the model during training.
+    padding: 40            # Size of black border around each training image
+    augment:               # Image augmentation options to artificially increase the training dataset size.
+      rotation: 5          # Add random small rotation (degrees) to each training image.
+      brightness: 0.2      # Add random small brightness shift, makes network more robust to different light conditions.
+      contrast: 0.2        # Add random small contrast shift.
+      saturation: 0.2      # Same, with saturation.
+      hue: 0.1             # Same, with hue.
+    optimizer:
+      lr: 0.01             # starting value of learning rate for SGD optimizer
+      momentum: 0.95       # momentum for SGD optimizer
+      patience: 4          # how many epoch without improvement need to happen before dropping the learning rate
+
+  # Show live output during training every 'x' amount of time.
+  # Examples of time intervals are: "5s", "10m", "1h12m5s".
+  display:
+    intervals:
+      console: "5s"  # Show training progress in console/stdout stream.
+      gui: "5s"      # Show output on a training example, remove/comment this line to disable this feature.
+
+  # Logs the state of the model and the training progress every 'x' amount of time.
+  # The state is written to checkpoint files on a storage device.
+  # There are also tensorboard event files written to monitor training progress.
+  logging:
+    dir: ""
+#    resume_from: "last"    # use this to resume training from an earlier checkpoint.
+    resume_from: null      # start training a brand new model (or start from a pre-trained model from the paper).
+    intervals:
+      stats: "1m"          # log the loss and learning rate (lr above) in tensorboard.
+      train_example: "2m"  # log output of the network on a training example in tensorboard.
+      # Specify time intervals to make a checkpoint of the network and training progress.
+      # Training can be resumed from a checkpoint file of an aborted training run.
+      # Every model checkpoint is also accompanied with a tensorboard event file logging the performance on test data.
+      model:
+        min: "5m"          # Don't save more frequent than this.
+        max: "10m"         # Even if training is not improving anymore, save a least every 'max' amount of time.
+
+
+inference:
+  # Where to look for images to segment. `x` and `y` are both folders with images.
+  # The program will go over each image file in `x`, segment it and write it to folder `y`.
+  # `x` is allowed to have subfolders, in which case the same subfolder structure will be replicated in `y`.
+  data:
+    x: ""
+    y: ""
+  # Path the model checkpoint file to use.
+  model: ""
+  # If an image is bigger than this, cut it in pieces and segment each piece separately.
+  max_size: {height: 1000, width: 1000}
+  # The postprocessing binarizes the network output and assumes that the largest connected component (cc) is the object
+  # you are looking for, i.e. the maize plant.
+  # Due to small leaf thickness the plant may actually be scattered across multiple cc's close to each other.
+  # Therefore the program will also include connected component close to largest cc.
+  postprocess:
+    threshold: 0.5        # Determines probability threshold for labelling a pixel as 'plant'.
+    size_threshold: 200   # If cc is within this amount of pixels, it is discarded as noise
+  n_cores: 4  # The max amount of CPU's used by forward pass, set to `null` to use all cpu's

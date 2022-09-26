@@ -1,0 +1,3 @@
+include README.md
+include phenovision/applications/_00_training/*
+include phenovision/applications/_01_lennart_verbreaken/*
