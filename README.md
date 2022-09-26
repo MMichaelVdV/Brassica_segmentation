@@ -1,6 +1,6 @@
 # *Brassica napus* image analysis
 
-Image segmentation on using a deep-learning network based on *densenet*:
+Segmentation of images of *Brassica napus* in the field using a deep-learning network based on *densenet*:
 - "Densely Connected Convolutional Networks" <https://arxiv.org/pdf/1608.06993.pdf>
 
 ## Installation / Upgrading
