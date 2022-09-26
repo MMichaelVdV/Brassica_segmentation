@@ -20,7 +20,7 @@ You can install both packages in development mode using `pip install -e`.
 1) Create / use a conda python 3 environment with at least pip version 19:
 
    ```bash
-   conda create -n $MYENV python=3
+   conda create -n $MYENV python=3.7
    source activate $MYENV
    ```
    
@@ -35,7 +35,7 @@ You can install both packages in development mode using `pip install -e`.
 3) Install all conda requirements:
 
    ```bash
-   conda install cytoolz future matplotlib numpy pandas pillow pyyaml scikit-image scipy tensorboard
+   conda install cytoolz future matplotlib numpy pandas pillow pyyaml scikit-image scipy tensorboard tensorflow
    ```
    
 4) Install this package with pip:
