@@ -112,7 +112,7 @@ Settings file can be either in `yaml` or `json` format.
 
 ### Running on SGE:
 
-Below is a template of a qsub script to run the program on an SGE cluster such as midas.
+Below is a template of a qsub script to run the program on an SGE cluster.
 This assumes you have installed the package in a conda env called `$MYENV`.
 
 ```
