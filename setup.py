@@ -17,7 +17,7 @@ VERSION = '0.1.0'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    'hooloovoo @ git+https://github.com/MMichaelVdV/hooloovoo.git@master',
+    'hooloovoo @ git+https://github.com/MMichaelVdV/hooloovoo.git',
     'matplotlib',
     'numpy',
     'pandas',
