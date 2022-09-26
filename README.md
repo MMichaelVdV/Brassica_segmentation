@@ -3,6 +3,8 @@
 Segmentation of images of *Brassica napus* plants in the field using a deep-learning network based on *densenet*:
 - "Densely Connected Convolutional Networks" <https://arxiv.org/pdf/1608.06993.pdf>
 
+Code Author: Sam De Meyer (https://github.com/SamDM)
+
 ## Installation / Upgrading
 
 ### Installation
