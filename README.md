@@ -96,7 +96,7 @@ pip install -e .
 Once installed, try the following:
 
 ```bash
-Brassica_segmentation -h
+cnn_segmentation -h
 ```
 
 If you get a help message, the installation worked.
