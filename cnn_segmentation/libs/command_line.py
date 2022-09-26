@@ -5,7 +5,7 @@ import textwrap
 from hooloovoo.deeplearning.utils import Mode
 from hooloovoo.utils.settings import load_settings_file
 
-_apps = [" brassomics"]
+_apps = ["brassomics"]
 
 
 def build_parser():
