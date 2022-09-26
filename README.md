@@ -104,7 +104,7 @@ If you get a help message, the installation worked.
 The `cnn_segmentation` command takes an application and a settings file as argument.
 Example settings files can be found here:
 
-* <https://github.com/MMichaelVdV/Brassica_segmentation/applications/brassomics/training/settings_devel.yaml>
+* <https://github.com/MMichaelVdV/Brassica_segmentation/blob/main/cnn_segmentation/applications/brassomics/settings/settings_devel.yaml>
 
 Settings file can be either in `yaml` or `json` format.
 
