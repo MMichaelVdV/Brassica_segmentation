@@ -41,11 +41,11 @@ You can install both packages in development mode using `pip install -e`.
 4) Install this package with pip:
    ```bash
    # The hooloovoo dependency
-   pip install 'git+https://github.com/MMichaelVdV/hooloovoo.git'
+   pip install 'git+https://github.com/MMichaelVdV/hooloovoo.git' or pip install git+https://github.com/MMichaelVdV/hooloovoo.git (Windows)
    
    # This repo
-   git clone 'git+https://github.com/MMichaelVdV/Brassica_segmentation.git'
-   cd cnn_segmentation
+   git clone 'git+https://github.com/MMichaelVdV/Brassica_segmentation.git' or git clone https://github.com/MMichaelVdV/Brassica_segmentation.git (Windows)
+   cd Brassica_segmentation
    pip install -e .
    ```
    
@@ -77,7 +77,7 @@ You can install both packages in development mode using `pip install -e`.
    
    # This repo
    git clone 'git+https://github.com/MMichaelVdV/Brassica_segmentation.git'
-   cd cnn_segmentation
+   cd Brassica_segmentation
    pip install -e .
    ```
 
@@ -86,7 +86,7 @@ You can install both packages in development mode using `pip install -e`.
 ```bash
 pip install --upgrade 'git+https://github.com/MMichaelVdV/hooloovoo.git'
 
-cd cnn_segmentation
+cd Brassica_segmentation
 git pull
 pip install -e .
 ```
@@ -96,7 +96,7 @@ pip install -e .
 Once installed, try the following:
 
 ```bash
-cnn_segmentation -h
+Brassica_segmentation -h
 ```
 
 If you get a help message, the installation worked.
@@ -120,11 +120,11 @@ This assumes you have installed the package in a conda env called `$MYENV`.
 
 module load anaconda
 source activate $MYENV
-pippa_cnn_segmentation $APP $SETTINGS_FILE
+Brassica_segmentation $APP $SETTINGS_FILE
 ```
 
 Where `$SETTINGS_FILE` contains the path to the `.json` or `.yaml` settings file,
-and `$APP` is either `phenovision` or `rhizoline`.
+and `$APP` is `brassomics`.
 
 ### Tensorboard
 
