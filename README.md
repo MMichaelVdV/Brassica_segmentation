@@ -41,11 +41,11 @@ You can install both packages in development mode using `pip install -e`.
 4) Install this package with pip:
    ```bash
    # The hooloovoo dependency
-   pip install 'git+https://gitlab.psb.ugent.be/Utilities/hooloovoo.git'
+   pip install 'git+https://github.com/MMichaelVdV/hooloovoo.git'
    
    # This repo
-   git clone 'git+https://gitlab.psb.ugent.be/samey/pippa_cnn_segmentation.git'
-   cd pippa_cnn_segmentation
+   git clone 'git+https://github.com/MMichaelVdV/Brassica_segmentation.git'
+   cd cnn_segmentation
    pip install -e .
    ```
    
@@ -73,20 +73,20 @@ You can install both packages in development mode using `pip install -e`.
 
    ```bash
    # The hooloovoo dependency
-   pip install 'git+https://gitlab.psb.ugent.be/Utilities/hooloovoo.git'
+   pip install 'git+https://github.com/MMichaelVdV/hooloovoo.git'
    
    # This repo
-   git clone 'git+https://gitlab.psb.ugent.be/samey/pippa_cnn_segmentation.git'
-   cd pippa_cnn_segmentation
+   git clone 'git+https://github.com/MMichaelVdV/Brassica_segmentation.git'
+   cd cnn_segmentation
    pip install -e .
    ```
 
 ### Upgrading
 
 ```bash
-pip install --upgrade 'git+https://gitlab.psb.ugent.be/Utilities/hooloovoo.git'
+pip install --upgrade 'git+https://github.com/MMichaelVdV/hooloovoo.git'
 
-cd pippa_cnn_segmentation
+cd cnn_segmentation
 git pull
 pip install -e .
 ```
@@ -96,24 +96,17 @@ pip install -e .
 Once installed, try the following:
 
 ```bash
-pippa_cnn_segmentation -h
+cnn_segmentation -h
 ```
 
 If you get a help message, the installation worked.
 
-The `pippa_cnn_segmentation` command takes an application and a settings file as argument.
+The `cnn_segmentation` command takes an application and a settings file as argument.
 Example settings files can be found here:
 
-* <https://gitlab.psb.ugent.be/samey/pippa_cnn_segmentation/blob/master/pippa_cnn_segmentation/applications/phenovision/_00_training/settings_devel.yaml>
-* <https://gitlab.psb.ugent.be/samey/pippa_cnn_segmentation/blob/master/pippa_cnn_segmentation/applications/rhizoline/_00_training/settings_local.yaml>
+* <https://github.com/MMichaelVdV/Brassica_segmentation/applications/phenovision/training/settings_devel.yaml>
 
 Settings file can be either in `yaml` or `json` format.
-
-### PIPPA
-
-The pippa integration files can be found here:
-* analysis definition: <https://gitlab.psb.ugent.be/samey/pippa_cnn_segmentation/blob/master/pippa_cnn_segmentation/pippa/phenovision/analysis_definition.json>
-* script: <https://gitlab.psb.ugent.be/samey/pippa_cnn_segmentation/blob/master/pippa_cnn_segmentation/pippa/phenovision/__init__.py>
 
 ### Running on SGE:
 
@@ -132,10 +125,6 @@ pippa_cnn_segmentation $APP $SETTINGS_FILE
 
 Where `$SETTINGS_FILE` contains the path to the `.json` or `.yaml` settings file,
 and `$APP` is either `phenovision` or `rhizoline`.
-
-### Training on Hydra GPU node (HPC of VUB)
-
-See the jobscripts and settings in: <https://gitlab.psb.ugent.be/samey/pippa_cnn_segmentation/tree/master/pippa_cnn_segmentation/applications/phenovision/_00_training_hydra_vub>
 
 ### Tensorboard
 
